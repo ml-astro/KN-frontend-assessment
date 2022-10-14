@@ -1,0 +1,29 @@
+import Modal from "./Modal";
+import { useState } from "react";
+import React from "react";
+import ReactDOM from "react-dom";
+
+const Order = (props) => {
+  const [showModal, toggleModal] = useState(false);
+  const orderData = props.data;
+  const modalHandler = () => {
+    toggleModal(!showModal);
+  };
+
+  return (
+    <tr>
+      <td>{orderData.orderNo}</td>
+      <td>{orderData.date}</td>
+      <td>{orderData.customer}</td>
+      <td>{orderData.trackingNo}</td>
+      <td>{orderData.status}</td>
+      <td>{orderData.consignee}</td>
+      <td>
+        <button onClick={modalHandler}>Details</button>
+      </td>
+      {showModal && ReactDOM.createPortal(<Modal data={props.data} onClose={modalHandler}></Modal>,document.getElementById('modal-portal'))}
+    </tr>
+  );
+};
+
+export default Order;
