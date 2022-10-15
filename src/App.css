@@ -38,6 +38,14 @@ td {
   background-color: rgba(0, 0, 0, 0.75);
 }
 
+img {
+  width: 40%;
+}
+
+img:hover {
+  cursor: pointer;
+}
+
 .modal {
   position: fixed;
   left: 0;

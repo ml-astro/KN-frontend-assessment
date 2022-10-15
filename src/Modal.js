@@ -1,19 +1,37 @@
 import React from "react";
 
 const Modal = (props) => {
+  const updatedData = {...props.data};
+  const sendUpdatedData = () => {
+    props.onOrderUpdate({...updatedData, prevId: props.data.orderNo});
+    props.onClose();
+  }
+  
+  const updateData = (event) => {
+    event.target.id === "orderno" && (updatedData.orderNo = event.target.value);
+    event.target.id === "date" && (updatedData.date = event.target.value);
+    event.target.id === "customer" &&
+      (updatedData.customer = event.target.value);
+    event.target.id === "tracking" &&
+      (updatedData.trackingNo = event.target.value);
+    event.target.id === "status" && (updatedData.status = event.target.value);
+    event.target.id === "consignee" &&
+      (updatedData.consignee = event.target.value);
+  };
+
   return (
     <React.Fragment>
-      <div className="backdrop" onClick={props.onClose}></div>
+      <div className="backdrop" onClick={sendUpdatedData}></div>
       <div className="modal">
         <form>
           <div>
-            <label htmlFor="orderno">orderNo:</label>
+            <label htmlFor="orderNo">orderNo:</label>
             <br />
             <input
               type="text"
               id="orderno"
               defaultValue={props.data.orderNo}
-              readOnly
+              onChange={updateData}
             />
           </div>
           <div>
@@ -23,7 +41,7 @@ const Modal = (props) => {
               type="text"
               id="date"
               defaultValue={props.data.date}
-              readOnly
+              onChange={updateData}
             />
           </div>
           <div>
@@ -33,7 +51,7 @@ const Modal = (props) => {
               type="text"
               id="customer"
               defaultValue={props.data.customer}
-              readOnly
+              onChange={updateData}
             />
           </div>
           <div>
@@ -43,7 +61,7 @@ const Modal = (props) => {
               type="text"
               id="tracking"
               defaultValue={props.data.trackingNo}
-              readOnly
+              onChange={updateData}
             />
           </div>
           <div>
@@ -53,13 +71,18 @@ const Modal = (props) => {
               type="text"
               id="consignee"
               defaultValue={props.data.consignee}
-              readOnly
+              onChange={updateData}
             />
           </div>
           <div>
             <label htmlFor="status">status:</label>
             <br />
-            <input type="text" id="status" defaultValue={props.data.status} readOnly/>
+            <input
+              type="text"
+              id="status"
+              defaultValue={props.data.status}
+              onChange={updateData}
+            />
           </div>
         </form>
       </div>

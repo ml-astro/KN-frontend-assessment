@@ -12,6 +12,9 @@ const Order = (props) => {
   const deleteHandler = () => {
     props.onDelete(orderData.orderNo);
   }
+  const updateOrder = order => {
+    props.onUpdate(order);
+  }
 
   return (
     <tr>
@@ -22,10 +25,10 @@ const Order = (props) => {
       <td>{orderData.status}</td>
       <td>{orderData.consignee}</td>
       <td>
-        <button onClick={modalHandler}>Details</button>
-        <button onClick={deleteHandler}>Delete</button>
+        <img src="./detail.png" alt="view details" onClick={modalHandler}/>
+        <img src="./delete.png" alt="delete order" onClick={deleteHandler}/>
       </td>
-      {showModal && ReactDOM.createPortal(<Modal data={props.data} onClose={modalHandler}></Modal>,document.getElementById('modal-portal'))}
+      {showModal && ReactDOM.createPortal(<Modal data={props.data} onOrderUpdate={updateOrder} onClose={modalHandler}></Modal>,document.getElementById('modal-portal'))}
     </tr>
   );
 };
