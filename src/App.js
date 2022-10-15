@@ -18,6 +18,14 @@ function App() {
     setOrders(data);
   }
 
+  const deleteOrder = orderNo => {
+    let newOrders = [...orders];
+    const orderIndex = newOrders.findIndex(order => {return order.orderNo === orderNo});
+    newOrders.splice(orderIndex,1);
+    setOrders(newOrders);
+    console.log(newOrders);
+  };
+
   return (
     <React.Fragment>
       <table>
@@ -40,7 +48,13 @@ function App() {
           )}
           {!isLoading &&
             orders.map((order) => {
-              return <Order data={order} key={order.orderNo}></Order>;
+              return (
+                <Order
+                  data={order}
+                  onDelete={deleteOrder}
+                  key={order.orderNo}
+                ></Order>
+              );
             })}
         </tbody>
       </table>

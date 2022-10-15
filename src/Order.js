@@ -9,6 +9,9 @@ const Order = (props) => {
   const modalHandler = () => {
     toggleModal(!showModal);
   };
+  const deleteHandler = () => {
+    props.onDelete(orderData.orderNo);
+  }
 
   return (
     <tr>
@@ -20,6 +23,7 @@ const Order = (props) => {
       <td>{orderData.consignee}</td>
       <td>
         <button onClick={modalHandler}>Details</button>
+        <button onClick={deleteHandler}>Delete</button>
       </td>
       {showModal && ReactDOM.createPortal(<Modal data={props.data} onClose={modalHandler}></Modal>,document.getElementById('modal-portal'))}
     </tr>
